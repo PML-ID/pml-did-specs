@@ -1,6 +1,6 @@
 # PML DID Method Specification
 ## 1. DID Naming Scheme
-DID format is did:pml:<method-specific-id>
+DID format is did:pml:[method-specific-id]
 
 ### 1.1. DID Method Name
 DID method name of this scheme is pml. A DID that uses this scheme MUST begin with the following prefix: did:pml:.The prefix MUST be in lowercase. The remainder of the DID is the method-specific identifier specified below
@@ -15,11 +15,11 @@ Key MSI should be encoded as follow:
 (2) Use ripemd160 hash public key type and public key, they are connected by character |
 (3) Use base58 encode hash value to obtain the method-specific-id
 ```
-This encoding process can be described as <method-specific-id>=base58(ripemd160(public key type|public key))
+This encoding process can be described as method-specific-id=base58(ripemd160(public key type|public key))
 
-pml-did = did:pml:<method-specific-id>
+pml-did = did:pml:[method-specific-id]
 
-method-specific-id = 32*58(base58char)
+method-specific-id = 32(maximum)*58(base58char)
 
 base58char = "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
 "A" / "B" / "C" / "D" / "E" / "F" / "G" / "H" / "J" / "K" / "L" / "M" / 
@@ -33,8 +33,10 @@ did:pml:5youxpsdXq5L8fj1g1MLPxmm2qDUdfjYe59DoAXgAVZZyCfyMRVnFGF
 ```
 #### 1.2.2. Identity MSI
 Identity MSI is encoded by combination of partial ASCII characters, it can describe identity or others information. The maximum length of identity MSI is 256 characters
-pml-did = did:pml:<method-specific-id>
-method-specific-id = 256(maximum )*64(partial ASCII char)
+
+pml-did = did:pml:[method-specific-id]
+
+method-specific-id = 256(maximum)*64(partial ASCII char)
 
 partial ASCII char = "0" ~ "9", "A" ~ "Z", "a" ~ "z", "/", "."
 
@@ -118,7 +120,7 @@ A DID document is created by send an HTTP POST request containing document eleme
 ### 3.2. DID Read
 A DID document can be read by sending an HTTP GET request
 
-If you want to read any DID document, you can use curl tool and execute curl command as curl https://did.pmlabs.com/v1/did/resolve/did:pml:<method-specific-id>. Response result looks like this:
+If you want to read any DID document, you can use curl tool and execute curl command as curl https://did.pmlabs.com/v1/did/resolve/did:pml:[method-specific-id]. Response result looks like this:
 ```json
 {
   "respCode": 0, 
